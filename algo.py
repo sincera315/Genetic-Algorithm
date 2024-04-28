@@ -1,16 +1,3 @@
-courses=pd.read_csv("courses.csv")
-df=courses.drop_duplicates()
-df=pd.concat([df.iloc[-1:],df.iloc[:-1]])
-df.to_csv('courses_new.csv', index=False)
-# courses
-courses=pd.read_csv("courses_new.csv")
-teachers=pd.read_csv("teachers.csv")
-studentCourses=pd.read_csv("studentCourse.csv")
-df1=studentCourses.drop_duplicates()
-df1=pd.concat([df.iloc[-1:],df1.iloc[:-1]])
-df1.to_csv('StudentCourses_new.csv', index=False)
-studentCourses=pd.read_csv("StudentCourses_new.csv")
-studentName=pd.read_csv("studentNames.csv")
 import random
 # for inputing data from the available files
 def read_data():
@@ -121,16 +108,22 @@ def fitness(individual):
     
     return fitness_score
 
- def roulette_wheel_selection(population, fitness_values):
+def roulette_wheel_selection(population, fitness_values):
     total_fitness = sum(fitness_values)
     selection_probs = [fit / total_fitness for fit in fitness_values]
     return random.choices(population, weights=selection_probs)[0]
 
-# def one_point_crossover(parent1, parent2):
-#     crossover_point = random.randint(1, NUM_GENES - 1)
-#     child1 = parent1[:crossover_point] + parent2[crossover_point:]
-#     child2 = parent2[:crossover_point] + parent1[crossover_point:]
-#     return child1, child2
+
+def one_point_crossover(parent1, parent2):
+    # Select a random crossover point
+    crossover_point = random.randint(1, len(parent1) - 1)
+    
+    # Perform crossover
+    child1 = pd.concat([parent1.iloc[:crossover_point], parent2.iloc[crossover_point:]], ignore_index=True)
+    child2 = pd.concat([parent2.iloc[:crossover_point], parent1.iloc[crossover_point:]], ignore_index=True)
+    
+    return child1, child2
+
 
 # def swap_mutation(individual):
 #     idx1, idx2 = random.sample(range(NUM_GENES), 2)
@@ -146,3 +139,7 @@ score1= fitness(p1)
 print(score1)
 score2 = fitness(p2)
 score2
+# Perform selection
+selected_population = roulette_wheel_selection([p1, p2], [score1, score2])
+# performing crossover.
+c1,c2=one_point_crossover(p1, p2)
