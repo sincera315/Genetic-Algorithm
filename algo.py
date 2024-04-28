@@ -125,10 +125,14 @@ def one_point_crossover(parent1, parent2):
     return child1, child2
 
 
-# def swap_mutation(individual):
-#     idx1, idx2 = random.sample(range(NUM_GENES), 2)
-#     individual[idx1], individual[idx2] = individual[idx2], individual[idx1]
-#     return individual
+def swap_mutation(individual):
+    # Randomly select two distinct indices
+    idx1, idx2 = random.sample(range(len(individual)), 2)
+    
+    # Swap the exams at the selected indices
+    individual.iloc[idx1], individual.iloc[idx2] = individual.iloc[idx2].copy(), individual.iloc[idx1].copy()
+    
+    return individual
 
 # Genetic Algorithm
 
@@ -143,3 +147,5 @@ score2
 selected_population = roulette_wheel_selection([p1, p2], [score1, score2])
 # performing crossover.
 c1,c2=one_point_crossover(p1, p2)
+# performing mutation
+mutated_individual = swap_mutation(p1.copy())
