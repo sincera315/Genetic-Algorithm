@@ -1,3 +1,16 @@
+courses=pd.read_csv("courses.csv")
+df=courses.drop_duplicates()
+df=pd.concat([df.iloc[-1:],df.iloc[:-1]])
+df.to_csv('courses_new.csv', index=False)
+# courses
+courses=pd.read_csv("courses_new.csv")
+teachers=pd.read_csv("teachers.csv")
+studentCourses=pd.read_csv("studentCourse.csv")
+df1=studentCourses.drop_duplicates()
+df1=pd.concat([df.iloc[-1:],df1.iloc[:-1]])
+df1.to_csv('StudentCourses_new.csv', index=False)
+studentCourses=pd.read_csv("StudentCourses_new.csv")
+studentName=pd.read_csv("studentNames.csv")
 import random
 # for inputing data from the available files
 def read_data():
