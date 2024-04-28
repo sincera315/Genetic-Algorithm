@@ -121,10 +121,10 @@ def fitness(individual):
     
     return fitness_score
 
-# def roulette_wheel_selection(population, fitness_values):
-#     total_fitness = sum(fitness_values)
-#     selection_probs = [fit / total_fitness for fit in fitness_values]
-#     return random.choices(population, weights=selection_probs)[0]
+ def roulette_wheel_selection(population, fitness_values):
+    total_fitness = sum(fitness_values)
+    selection_probs = [fit / total_fitness for fit in fitness_values]
+    return random.choices(population, weights=selection_probs)[0]
 
 # def one_point_crossover(parent1, parent2):
 #     crossover_point = random.randint(1, NUM_GENES - 1)
