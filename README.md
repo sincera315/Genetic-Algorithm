@@ -72,5 +72,5 @@ The genetic algorithm is employed to generate timetables based on the input data
 
 ## Contributing
 
-its a pair project done with collaboration of mahnoor mehmood and zoha wajahat
+Its a pair project done with collaboration of Mahnoor Mehmood and Zoha Wajahat
 
